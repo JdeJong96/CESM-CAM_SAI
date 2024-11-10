@@ -1,0 +1,38 @@
+./data/lres_b.e10.B2000_CAM5.f09_g16.feedforward.001.nc already exists, skipping.
+./data/lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001.nc already exists, skipping.
+./data/mres_b.e10.B2000_CAM5.f05_t12.001.nc already exists, skipping.
+B.E.13.B1950TRC5.ne30g16.ihesp24.control2020.01
++2.8 sec: <Client: 'tcp://127.0.0.1:40927' processes=16 threads=16, memory=28.00 GiB>
++11.7 sec: opened dataset
++16.8 sec: created ./data/B.E.13.B1950TRC5.ne30g16.ihesp24.control2020.01.nc
+B.E.13.B1950TRC5.ne30g16.ihesp24.sai2020.01
++2.0 sec: <Client: 'tcp://127.0.0.1:42623' processes=16 threads=16, memory=28.00 GiB>
++69.4 sec: opened dataset
++121.7 sec: created ./data/B.E.13.B1950TRC5.ne30g16.ihesp24.sai2020.01.nc
+B.E.13.B1950TRC5.ne30g16.ihesp24.sai2050.01
++2.0 sec: <Client: 'tcp://127.0.0.1:35637' processes=16 threads=16, memory=28.00 GiB>
++42.0 sec: opened dataset
++70.9 sec: created ./data/B.E.13.B1950TRC5.ne30g16.ihesp24.sai2050.01.nc
+B.E.13.BRCP85C5.ne30g16.feedback.006
++2.0 sec: <Client: 'tcp://127.0.0.1:45621' processes=16 threads=16, memory=28.00 GiB>
++12.0 sec: opened dataset
++18.8 sec: created ./data/B.E.13.BRCP85C5.ne30g16.feedback.006.nc
+B.E.13.BRCP85C5.ne30g16.sai.fb.2020.001
++2.2 sec: <Client: 'tcp://127.0.0.1:36929' processes=16 threads=16, memory=28.00 GiB>
++9.2 sec: opened dataset
++13.6 sec: created ./data/B.E.13.BRCP85C5.ne30g16.sai.fb.2020.001.nc
+
+JOB STATISTICS
+==============
+Job ID: 7962207
+Cluster: snellius
+User/Group: jasperdj/jasperdj
+State: RUNNING
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 01:12:16 core-walltime
+Job Wall-clock time: 00:04:31
+Memory Utilized: 0.00 MB (estimated maximum)
+Memory Efficiency: 0.00% of 28.00 GB (1.75 GB/core)
+WARNING: Efficiency statistics may be misleading for RUNNING jobs.
