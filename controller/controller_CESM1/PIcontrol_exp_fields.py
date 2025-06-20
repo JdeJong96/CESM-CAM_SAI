@@ -62,29 +62,35 @@ exp_fields_path = os.path.join(maindir,'exp_fields_jasper_01/') # path to exp fi
 
 #prescribed_strataero_datapath          = '/projects/0/uuesm/GeoEng/feedback/'
 prescribed_strataero_datapath           = f'/projects/0/nwo2021025/archive/{casename}/strataero'
-prescribed_strataero_file               = "ozone_strataero_2019-2100_SSP585_CAMfeedback.nc"
+prescribed_strataero_file               = "ozone_strataero_1999-2100_SSP585_CAMfeedback.nc"
+
+prescribed_volcaero_datapath            = f'/projects/0/nwo2021025/archive/{casename}/volcaero'
+prescribed_volcaero_file                = "volcaero_1999-2100_SSP585_CAMfeedback.nc"
 
 if (not os.path.exists(prescribed_strataero_datapath)):
     print('INFO: creating '+prescribed_strataero_datapath)
     os.makedirs(prescribed_strataero_datapath)
     assert(os.path.exists(prescribed_strataero_datapath))
 
+if (not os.path.exists(prescribed_volcaero_datapath)):
+    print('INFO: creating '+prescribed_volcaero_datapath)
+    os.makedirs(prescribed_volcaero_datapath)
+    assert(os.path.exists(prescribed_volcaero_datapath))
+
 strataero_path_namelist = os.path.join(prescribed_strataero_datapath ,prescribed_strataero_file)
+volcaero_path_namelist = os.path.join(prescribed_volcaero_datapath ,prescribed_volcaero_file)
 
 # This is the original strataero, only needed once (at the start)
-strataero_path_cnt = '/projects/0/nwo2021025/feedback_LR/ozone_strataero1mode_blanked.nc'
+strataero_path_cnt = '/projects/0/nwo2021025/feedback_LR/ozone_strataero1mode_blanked_1999-2100.nc'
+
 
 #### PREPARE LOG ####
 
 logfilename='ControlLog_'+casename+'.txt'
 
-logheader=['Timestamp','dT0','sum(dT0)','L0','L0hat','int_weight','n_AODVISstdn',
+logheader=['Timestamp','dT0','sum(dT0)','L0','L0hat','int_weight','n_AODVISstdn', 
            'n_H2SO4_mass','n_rmode','n_sad',
            'n_H2SO4_mmr','n_SAD_AERO','REFF_AERO']
-
-           #'n_so4mass_a1','n_so4mass_a2','n_so4mass_a3',
-           #'n_diamwet_a1','n_diamwet_a2','n_diamwet_a3',
-           #'n_SAD_AERO']
 
 # 'firsttime' is a flag value that is set to 1 if the script is run for the first time
 # in this first run, an output log is created
@@ -96,54 +102,36 @@ else:
     loglines=readlog(maindir+'/'+logfilename)
     print('INFO: continuation')
 
-
-
-
-BLAAAAAAAAAAAAAAAAAA
-
-
-
-
-
-
-
 #### USER-SPECIFIED CONTROL PARAMETERS ####
 
-refvals=[287.46] # temperature in 2051 = 289.28221851042696
+refvals=[288.93796] # temperature in 2051 = 289.28221851042696
 
 # --- meeting 12 Oct 2022, new targets
-#refvals=[287.46] # LR target HighResMIP
-#refvals=[289.17] # HR target HighResMIP
+#refvals=[288.93796] # LR target cesm104
+#refvals=[289.17] # HR target ??????
 # ---
 
 kivals=[0.028] # integration parameter of feedback "k_i"
 kpvals=[0.028] # proportional parameter of feedback "k_p"
-firstyear=2000 # starting year of feedback
-baseyear=2015  # only to define the dt for computing the feedforward. keep at 2020 when re-using the WACCM feedforward.
-kff = 0.004264# feedforward constant
+firstyear=2050 # starting year of feedback
+baseyear=2000  # only to define the dt for computing the feedforward. keep at 2020 when re-using the WACCM feedforward.
+kff = 0.00362# feedforward constant
 # Integrator ramp-up: summation of error terms is ramped up over a time interval
 # This is achieved by multiplying error terms with a weight factor from 0 to 1 that is linearly raised over a given time interval
-int_onset_threshold = 0.5 # Temperature deviation threshold for onset of integrator
-int_failsafe_time = 6 # Time interval after which to start integrator in case other onset condition is not met
+#int_onset_threshold = 0.5 # Temperature deviation threshold for onset of integrator
+#int_failsafe_time = 6 # Time interval after which to start integrator in case other onset condition is not met
 #+++JDJ+++
 USE_INTEGRATOR_RESET = True  # bool, if True: int_weight=1, sum(dT0) gets reset to zero once upon reaching target temp
 #+++JDJ+++
 
-# correct the feedforward term used by Tilmes et. al.
-# our control run gives 5.5K/century warming,
-# in the geoengineering run (using the WACCM forcing as provided by Tilmes et. al.) leaves a 1.3K/century residual warming
-# the following correction factor incorporates this fact
-#CAM_WACCM_corrfac = 5.5/(5.5-1.3)
+#### FEEDBACK COMPUTATION ####
 
+# compute the temperature goals (in our case, only T0 which is global mean surface temp.) and error terms
 
+w=makeweights(lats,lons)
+T0=numpy.mean(gmean(outvals[0],w))
+de=numpy.array([T0-refvals[0]]) # error terms: last years' deviation from the goal
 
-
-
-#### IMPORTANT FILE PATHS ####
-
-#
-# 2021-10-01
-#
 # Extract previous timestamp from log (or initialize if this is the first time)
 if firsttime==1:          #the sum over all previous errors (integral term)
     timestamp=firstyear
@@ -154,37 +142,24 @@ else:
 assert timestamp>1900 and timestamp<2300, 'Unrealistic timestamp from previous year. Are you reading the log file correctly?'
 print(f'INFO: year = {timestamp}')
 
-
-
-
-
-#### FEEDBACK COMPUTATION ####
-
-# compute the temperature goals (in our case, only T0 which is global mean surface temp.) and error terms
-
-#w=makeweights(lats,lons) # LvK: hack for Spectral Element data
-#T0=numpy.mean(gmean(outvals[0],w)) # LvK: hack for Spectral Element data
-assert(len(da_var) == 12) # LvK 12 months
-TREFHT_mean = da_var.mean(dim='time')
-T0 = (1/da_area.sum() * TREFHT_mean*da_area).sum(dim='ncol').item()
-
-print('DEBUG T0',T0)
-#sys.exit(0)
-
-de=numpy.array([T0-refvals[0]]) # error terms: last years' deviation from the goal
-
 int_weight = 0 # Integrator weight is binary: 0 or 1
+# DP: Note that in the case of a resetting integrator,
+# int_weight is essentially a dummy variable that will always be set to 1
+# The integrator dynamics are only modified by the reset
 
-if not firsttime==1: # Once integrator has been activated, always leave it on / Can only be executed if log file already exists, hence 'not firsttime' is required
-    previous_int_weight = int(loglines[-1][4])
-    # Check that previous int_weight was read correctly
-    assert previous_int_weight==0 or previous_int_weight==1, 'Non-binary int weight from previous year. Are you reading the log file correctly?'
-    if previous_int_weight==1:
-        int_weight = 1
-if abs(de)<int_onset_threshold: # Activate integrator once temperature error is within acceptable range
-    int_weight = 1
-if timestamp >= (firstyear + int_failsafe_time): # Activate integrator after defined time period has passed
-    int_weight = 1
+# DP 11.1.23: these conditions are not relevant for the integrator reset approach:
+# the integrator is always turned on (see 'USE_INTEGRATOR_RESET' condition below)
+#if not firsttime==1: # Once integrator has been activated, always leave it on / Can only be executed if log file already exists, hence 'not firsttime' is required
+#    previous_int_weight = int(loglines[-1][4])
+#    # Check that previous int_weight was read correctly
+#    assert previous_int_weight==0 or previous_int_weight==1, 'Non-binary int weight from previous year. Are you reading the log file correctly?'
+#    if previous_int_weight==1:
+#        int_weight = 1
+#if abs(de)<int_onset_threshold: # Activate integrator once temperature error is within acceptable range
+#    int_weight = 1
+#if timestamp >= (firstyear + int_failsafe_time): # Activate integrator after defined time period has passed
+#    int_weight = 1
+
 #+++JDJ+++
 if USE_INTEGRATOR_RESET:
     int_weight = 1 # Integrator is always active
@@ -209,13 +184,12 @@ else:
     #+++JDJ+++
 
 dt = timestamp - baseyear
-
+print(f'INFO: year = {timestamp}')
 
 #first, we compute the feedforward and feedback, hence the total "geoengineering strength", in terms of AOD patterns (only l0 in our case)
 
 # feedforward
 # based on the WACCM simulation, but scaled with CAM_WACCM_corrfac to take into account that CAM needs more cooling.
-#l0hat=0.0079*dt * CAM_WACCM_corrfac
 l0hat = kff * dt
 
 # feedback
@@ -227,27 +201,37 @@ l0step4=l0kp1+l0hat
 l0=max(l0step4,0)
 ell=numpy.array([[l0]])
 
-
 ### UPDATING FORCING FILE ###
-
 
 if (firsttime):
     print(f'INFO: base file: {strataero_path_cnt}')
-    strataero_old = strataero_path_cnt
+    strataero_path = strataero_path_cnt
+    volcaero_path = volcaero_path_namelist
 else:
-    strataero_old = os.path.join(prescribed_strataero_datapath, prescribed_strataero_prevyear )
+    # archive current strataero file, adding the year as a label
+    label = timestamp-1
+    new_path = strataero_path_namelist.replace('.nc', f'-{label}.nc')
+    if (os.path.isfile(new_path)):
+        print(f'INFO: current strataero file has already been archived? Skipping archive step')
+        if (os.path.isfile(strataero_path_namelist)):
+            raise RuntimeError(f'current strataero file {strataero_path_namelist} needs to be removed manually')
+    else:
+        assert(os.path.isfile(strataero_path_namelist) == True)
+        print(f'INFO: archiving current strataero file as {new_path}')
+        os.rename(strataero_path_namelist, new_path)
+    print(f'INFO: base file: {new_path}')
+    strataero_path = new_path
 
-assert os.path.isfile(strataero_old), f'file not found: {strataero_old}'
+    volcaero_path = volcaero_path_namelist
 
-strataero_path = os.path.join(prescribed_strataero_datapath, prescribed_strataero_curyear) 
-
-
-print(f'INFO: storing result in {prescribed_strataero_curyear}')
+print(f'INFO: storing result in {strataero_path_namelist}')
+print(f'INFO: storing result in {volcaero_path_namelist}')
 
 # Load expected fields
 exp_fields = strataero_forcing.load_expected_fields(exp_fields_path )
 
-with xr.open_dataset(strataero_old) as strataero_ds:
+
+with xr.open_dataset(strataero_path) as strataero_ds:
 
     aod_norm = l0 # this includes Claudia's correction factor
     #
@@ -269,8 +253,11 @@ with xr.open_dataset(strataero_old) as strataero_ds:
     #
 
     # Note LvK: need to write NetCDF3, as NetCDF4 does seem to give errors within CESM
-    strataero_ds.to_netcdf(strataero_path, format='NETCDF3_64BIT')
+    strataero_ds.to_netcdf(strataero_path_namelist, format='NETCDF3_64BIT')
 
+volcaerofile = volcaero_path_namelist
+aerofile = strataero_path_namelist
+avf.main(aerofile, volcaerofile, timestamp)
 
 #strataero_ds.to_netcdf('foo.nc')
 
@@ -280,23 +267,12 @@ with xr.open_dataset(strataero_old) as strataero_ds:
 #
 
 
-prescribed_strataero_file = os.path.basename(strataero_path)
-nlname1 = 'prescribed_strataero_file' 
-nlval1 = f"prescribed_strataero_file = '{prescribed_strataero_file}'"
-print(nlval1)
-
-nlvals = [nlname1,nlval1] 
-
 #### WRITE LOG ####
 
-newline = [str(timestamp),str(de[0]),str(sumde[0]),str(l0),str(int_weight),
-           str(norm_consts['AODVISstdn']),
+newline = [str(timestamp),str(de[0]),str(sumde[0]),str(l0),str(l0hat),
+           str(int_weight),str(norm_consts['AODVISstdn']),
            str(norm_consts['H2SO4_mass']), str(norm_consts['rmode']), str(norm_consts['sad']), 
            str(norm_consts['H2SO4_mmr']), str(norm_consts['SAD_AERO']), str(norm_consts['REFF_AERO']) ]
-
-         #  str(norm_consts['so4mass_a1']),str(norm_consts['so4mass_a2']),str(norm_consts['so4mass_a3']),
-         #  str(norm_consts['diamwet_a1']),str(norm_consts['diamwet_a2']),str(norm_consts['diamwet_a3']),
-         #  str(norm_consts['SAD_AERO'])]
 
 if firsttime==1:
     linestowrite=[logheader,newline]
