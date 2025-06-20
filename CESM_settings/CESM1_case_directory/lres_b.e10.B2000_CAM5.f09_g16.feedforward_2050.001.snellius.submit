@@ -1,0 +1,9 @@
+#! /bin/csh -f
+
+./check_case || echo "check_case failed" && exit -99
+
+sbatch < lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001.snellius.run
+
+set sdate = `date +"%Y-%m-%d %H:%M:%S"`
+echo "run submitted $sdate" >>& CaseStatus
+

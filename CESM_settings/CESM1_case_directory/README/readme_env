@@ -1,0 +1,1698 @@
+name: AOFLUX_GRID 
+description: grid for atm ocn flux calc
+valid values: ocn,atm,exch 
+default value: ocn 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ATM_GRID 
+description: atmosphere grid
+default value: 0.9x1.25 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: ATM_NCPL 
+description: number of atm coupling intervals per day
+default value: 48 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: ATM_NX 
+description: number of atmosphere cells in i direction
+default value: 288 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: ATM_NY 
+description: Number of atmosphere cells in j direction
+default value: 192 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: ATM_PIO_NUMTASKS 
+description: atm pio number of io tasks
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ATM_PIO_ROOT 
+description: pio root processor
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ATM_PIO_STRIDE 
+description: pio stride
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ATM_PIO_TYPENAME 
+description: pio io type
+default value: nothing 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: AVGHIST_DATE 
+description: yyyymmdd format, sets coupler time-average history date (like REST_DATE)
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: AVGHIST_N 
+description: sets coupler time-average history file frequency (like REST_N)
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: AVGHIST_OPTION 
+description: sets coupler time-average history file frequency (like REST_OPTION)
+default value: never 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BATCHQUERY 
+description: command used to query batch system
+default value: squeue 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BATCHSUBMIT 
+description: command used to submit to batch system
+default value: sbatch &lt; 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BATCH_PES 
+description: pes requested at batch runtime
+default value: 0 
+ 
+name: BFBFLAG 
+description: turns on bit-for-bit reproducibility with varying pe counts 
+       in the driver and coupler, performance will likely be reduced
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BLDROOT 
+description: CCSM source scripts build directory location
+default value: $CCSMROOT/scripts/ccsm_utils/Build 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: BRNCH_RETAIN_CASENAME 
+description: allow same branch casename as reference casename
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: BUDGETS 
+description: logical that turns on diagnostic budgets
+        FALSE means budgets will never be written
+valid values: TRUE,FALSE 
+default value: TRUE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUDGET_ANNUAL 
+description: output level for annual average budget diagnostics,
+        written only if BUDGETS variable is TRUE,
+        0=none, 1=net summary, 2=+detailed surface, 3=+detailed atm
+valid values: 0,1,2,3 
+default value: 1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUDGET_DAILY 
+description: output level for daily average budget diagnostics,
+        written only if BUDGETS variable is TRUE,
+        0=none, 1=net summary, 2=+detailed surface, 3=+detailed atm
+valid values: 0,1,2,3 
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUDGET_INST 
+description: output level for instantaneous budget diagnostics,
+        written only if BUDGETS variable is TRUE,
+        0=none, 1=net summary, 2=+detailed surface, 3=+detailed atm
+valid values: 0,1,2,3 
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUDGET_LONGTERM_EOY 
+description: output level for longterm average budget diagnostics written at end of year,
+        written only if BUDGETS variable is TRUE,
+        0=none, 1=net summary, 2=+detailed surface, 3=+detailed atm
+valid values: 0,1,2,3 
+default value: 1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUDGET_LONGTERM_STOP 
+description: output level for longterm average budget diagnostics written at end of run,
+        written only if BUDGETS variable is TRUE,
+        0=none, 1=net summary, 2=+detailed surface, 3=+detailed atm
+valid values: 0,1,2,3 
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUDGET_MONTHLY 
+description: output level for monthly average budget diagnostics,
+        written only if BUDGETS variable is TRUE,
+        0=none, 1=net summary, 2=+detailed surface, 3=+detailed atm
+valid values: 0,1,2,3 
+default value: 1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: BUILD_COMPLETE 
+description: If TRUE, models have been built successfully. (DO NOT EDIT)
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: BUILD_STATUS 
+description: Status of prior build. (DO NOT EDIT)
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: BUILD_THREADED 
+description: TRUE implies always build model for openmp capability
+   If FALSE, build model with openmp capability only if THREAD is greater than 1
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: CALENDAR 
+description: calendar type
+valid values: NO_LEAP,GREGORIAN 
+default value: NO_LEAP 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CAM_CONFIG_OPTS 
+description: CAM configure options, see CAM configure utility for details
+default value: -phys cam4 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CAM_DYCORE 
+description: CAM dynamical core
+valid values: eul,fv,homme 
+default value: fv 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CAM_NAMELIST_OPTS 
+description: CAM specific namelist settings for -namelist option
+default value:  
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CAM_NML_USE_CASE 
+description: CAM namelist use_case
+default value: UNSET 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CASE 
+description: case name
+default value: lres_b.e10.B2000_CAM5.f09_g16.001 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CASEBUILD 
+description: Buildconf directory location
+default value: $CASEROOT/Buildconf 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CASEROOT 
+description: full path of case
+default value: /gpfs/home4/renew1/cesm/cesm_tags/cesm1_0_4/scripts/lres_b.e10.B2000_CAM5.f09_g16.001 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CASESTR 
+description: case description
+default value: UNSET 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CASETOOLS 
+description: Case Tools directory location
+default value: $CASEROOT/Tools 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSMROOT 
+description: ccsm source root directory
+default value: /gpfs/home4/renew1/cesm/cesm_tags/cesm1_0_4 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSMUSER 
+description: case user name
+default value: renew1 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_BASELINE 
+description: standard ccsm baselines directory for testing
+default value: /fis/cgd/cseg/csm/ccsm_baselines 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CCSM_BGC 
+description: BGC flag
+valid values: none,CO2A,CO2B,CO2C,CO2_DMSA 
+default value: CO2A 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CCSM_CCOST 
+description: 2**n relative cost of compset B is 1 (DO NOT EDIT)
+default value: 0 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_CO2_PPMV 
+description: CO2 ppmv
+default value: 367.0 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CCSM_COMPSET 
+description: CCSM component set
+default value: B_2000 (B) 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_CPRNC 
+description: standard location of the cprnc tool
+default value: /fis/cgd/cseg/csm/tools/cprnc/cprnc 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CCSM_ESTCOST 
+description: 2**n relative cost of case (DO NOT EDIT)
+default value: 0 
+ 
+name: CCSM_GCOST 
+description: 2**n relative cost of grid f19_g15 is 1 (DO NOT EDIT)
+default value: 2 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_LCOMPSET 
+description: CCSM component set, longname
+default value: B_2000 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_MCOST 
+description: 2**n relative cost of machine (DO NOT EDIT)
+default value: 0 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_PCOST 
+description: cost relative to 64 pes (DO NOT EDIT)
+default value: 0 
+ 
+name: CCSM_REPOTAG 
+description: CCSM tag
+default value: cesm1_0_4 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CCSM_SCOMPSET 
+description: CCSM component set, shortname
+default value: B 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: CCSM_TCOST 
+description: 2**n relative cost of test where ERS is 1 (DO NOT EDIT)
+default value: 0 
+ 
+name: CCSM_VOC 
+description: Only used for B,E,F,I compsets: if true will pass VOC fields from lnd to atm
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CHECK_TIMING 
+description: logical to diagnose model timing at the end of the run
+valid values: TRUE,FALSE 
+default value: TRUE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CICE_AUTO_DECOMP 
+description: if false, user must set the CICE decomp, otherwise configure sets it
+valid values: true,false 
+default value: true 
+ 
+name: CICE_BLCKX 
+description: Size of cice block in first horiz dimension.
+    Value set by generate_cice_decomp.pl (called by configure).
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: CICE_BLCKY 
+description: Size of cice block in second horiz dimension.
+    Value set by generate_cice_decomp.pl (called by configure).
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: CICE_CONFIG_OPTS 
+description: CICE configure options, see CICE configure utility for details
+default value:   
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CICE_DECOMPTYPE 
+description: cice block distribution type.
+    Value set by generate_cice_decomp.pl (called by configure).
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: CICE_MODE 
+description: cice mode
+valid values: prognostic,prescribed,thermo_only 
+default value: prognostic 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CICE_MXBLCKS 
+description: Max number of cice blocks per processor.
+    Value set by generate_cice_decomp.pl (called by configure).
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: CICE_NAMELIST_OPTS 
+description: CICE specific namelist settings for -namelist option
+default value:  
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_BLDNML_OPTS 
+description: Options to send to CLM build-namelist (see models/lnd/clm/bld/build-namelist -h for list of options)
+default value:  
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_CO2_TYPE 
+description: clm CO2 type, constant means value in CLM namelist, diagnostic or prognostic mean use the value sent from the atmosphere model
+valid values: constant,diagnostic,prognostic 
+default value: diagnostic 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_CONFIG_OPTS 
+description: Options to send to CLM configure (see models/lnd/clm/bld/configure -h for list of options)
+default value:  
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_FORCE_COLDSTART 
+description: Value of 'on' forces model to spinup from a cold-start (arbitrary initial conditions)
+valid values: on,off 
+default value: off 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_NAMELIST_OPTS 
+description: Namelist settings to add to the clm_inparm namelist 
+        Note, use &apos; around character values, as XML parser can't handle quotes
+inside strings.
+        (list of item=value settings, see models/lnd/clm/bld/namelist_files/namelist_definition.xml)
+default value:  
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_NML_USE_CASE 
+description: CLM namelist use_case
+        (for a list see models/lnd/clm/bld/build-namelist -use_case list)
+default value: 2000_control 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_PT1_NAME 
+description: Name of single point resolution dataset to be used in I compset only
+        (for a list see models/lnd/clm/bld/build-namelist -res list)
+default value: UNSET 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CLM_USRDAT_NAME 
+description: Data identifier name for CLM user-created datasets (see Quickstart.userdatasets)
+default value: UNSET 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CODEROOT 
+description: CCSM source models directory location
+default value: $CCSMROOT/models 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_ATM 
+description: Name of atmospheric component 
+valid values: cam,datm,xatm,satm 
+default value: cam 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_CPL 
+description: Name of coupling component
+valid values: cpl 
+default value: cpl 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_GLC 
+description: Name of land ice component
+valid values: xglc,sglc,cism 
+default value: sglc 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_ICE 
+description: Name of sea ice component
+valid values: cice,dice,xice,sice 
+default value: cice 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_INTERFACE 
+description: use MCT or ESMF component interfaces
+valid values: MCT,ESMF 
+default value: MCT 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: COMP_LND 
+description: Name of land component
+valid values: clm,dlnd,xlnd,slnd 
+default value: clm 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_OCN 
+description: Name of ocean component
+valid values: pop2,docn,xocn,socn,camdom 
+default value: pop2 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: COMP_RUN_BARRIERS 
+description: if TRUE, turns on component run barrier calls in the driver
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CONTINUE_RUN 
+description: A continue run extends an existing CCSM run exactly.                 
+        A setting of TRUE implies a continuation run
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CPL_ALBAV 
+description: Only used for C,G compsets: if true, compute albedos to work with daily avg SW down
+valid values: true,false 
+default value: false 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CPL_EPBAL 
+description: Only used for C,G compsets: if ocn, ocn provides EP balance factor for precip
+valid values: off,ocn 
+default value: off 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: CPL_PIO_NUMTASKS 
+description: pio number of io tasks
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CPL_PIO_ROOT 
+description: pio root processor
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CPL_PIO_STRIDE 
+description: pio stride
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: CPL_PIO_TYPENAME 
+description: pio io type
+default value: nothing 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DATM_CLMNCEP_YR_ALIGN 
+description: year align (simulation year corresponding to starting year) for CLM_QIAN mode
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_CLMNCEP_YR_END 
+description: ending year to loop atmosphere forcing data over for CLM_QIAN mode
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_CLMNCEP_YR_START 
+description: starting year to loop atmosphere forcing data over for CLM_QIAN mode
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_CPL_CASE 
+description: the case name to use for cpl history forcing data for CPLHIST3HrWx mode
+default value: UNSET 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_CPL_YR_ALIGN 
+description: year align (simulation year corresponding to starting year) for CPLHIST3HrWx mode
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_CPL_YR_END 
+description: ending year to loop data over for CPLHIST3HrWx mode
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_CPL_YR_START 
+description: starting year to loop data over for CPLHIST3HrWx mode
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_MODE 
+description: DATM mode
+valid values: CORE2_NYF,CORE2_IAF,CLM_QIAN,CLM1PT,CPLHIST3HrWx 
+default value: CORE2_NYF 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DATM_PRESAERO 
+description: DATM prescribed aerosol forcing
+valid values: none,clim_1850,clim_2000,trans_1850-2000,rcp2.6,rcp4.5,rcp6.0,rcp8.5,pt1_pt1 
+default value: none 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DEBUG 
+description: TRUE implies turning on run and compile time debugging
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: DICE_MODE 
+description: DICE mode
+valid values: ssmi,ssmi_iaf 
+default value: ssmi 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DIN_LOC_ROOT 
+description: local inputdata directory for CCSM prestaged data
+default value: $DIN_LOC_ROOT_CSMDATA 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DIN_LOC_ROOT_CLMQIAN 
+description: general ccsm inputdata directory for CLM QIAN datm forcing files
+default value: /cgd/tss/atm_forcing.datm7.Qian.T62.c080727 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DIN_LOC_ROOT_CSMDATA 
+description: general ccsm inputdata directory
+default value: /projects/0/nwo2021025/cesm1_0_4/inputdata 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DLND_MODE 
+description: DLND mode
+valid values: CPLHIST,NULL 
+default value: NULL 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DLND_RUNOFF_MODE 
+description: DLND runoff mode
+valid values: CPLHIST,DIATREN_ANN_RX1,DIATREN_IAF_RX1,NULL 
+default value: DIATREN_ANN_RX1 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DOCN_MODE 
+description: DOCN mode
+valid values: prescribed,som 
+default value: prescribed 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DOCN_SSTDATA_FILENAME 
+description: Sets sst/ice_cov filename for amip runs, only used in F compset
+default value: UNSET 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DOCN_SSTDATA_YEAR_END 
+description: Sets year end of sst/ice_cov for amip runs, only used in F compset
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DOCN_SSTDATA_YEAR_START 
+description: Sets year start of sst/ice_cov for amip runs, only used in F compset
+default value: -999 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: DOUT_L_HPSS_ACCNT 
+description: account number charged for long term archival on hpss
+default value: 00000000 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DOUT_L_HTAR 
+description: logical to tar up long term archiver history files
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DOUT_L_MS 
+description: logical to turn on long term archiving (if DOUT_S is also TRUE)
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DOUT_L_MSROOT 
+description: local long term archiving root directory
+default value: csm/$CASE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DOUT_S 
+description: logical to turn on short term archiving
+valid values: TRUE,FALSE 
+default value: TRUE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DOUT_S_ROOT 
+description: local short term archiving root directory
+default value: /projects/0/nwo2021025/archive/$CASE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DOUT_S_SAVE_INT_REST_FILES 
+description: logical to archive all interim restart files, not just those at end of run
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: DRV_THREADING 
+description: Turns on component varying thread control in the driver
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_AAREA 
+description: error tolerance for differences in atm/land areas in domain checking
+default value: 9.0e-07 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_AGRID 
+description: error tolerance for differences in atm/land lon/lat in domain checking
+default value: 1.0e-12 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_AMASK 
+description: error tolerance for differences in atm/land masks in domain checking
+default value: 1.0e-13 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_FRAC 
+description: error tolerance for differences in fractions in domain checking
+default value: 1.0e-02 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_OAREA 
+description: error tolerance for differences in ocean/ice areas in domain checking
+default value: 1.0e-01 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_OGRID 
+description: error tolerance for differences in ocean/ice lon/lat in domain checking
+default value: 1.0e-02 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: EPS_OMASK 
+description: error tolerance for differences in ocean/ice masks in domain checking
+default value: 1.0e-06 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ESMF_LIBDIR 
+description: directory of esmf.mk in pre-built ESMF library
+default value: /ptmp/svasquez/esmf_install/ESMF_5_2_0-O/lib/ 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: EXEROOT 
+description: executable root directory
+default value: /projects/0/nwo2021025/cesm1_0_4/$CASE 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: GET_REFCASE 
+description: flag for automatically prestaging the refcase restart dataset
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: GLC_GRID 
+description: Glacier model grid
+valid values: gland20,gland10,gland5 
+default value: gland20 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: GLC_NCPL 
+description: number of glc coupling intervals per day (integer)
+default value: 1 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: GLC_NEC 
+description: GLC land ice model number of elevation classes
+valid values: 0,3,5,10 
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: GLC_NX 
+description: number of glc cells in i direction
+default value: 288 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: GLC_NY 
+description: number of glc cells in j direction
+default value: 192 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: GLC_PIO_NUMTASKS 
+description: pio number of io tasks
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: GLC_PIO_ROOT 
+description: pio root processor
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: GLC_PIO_STRIDE 
+description: pio stride
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: GLC_PIO_TYPENAME 
+description: pio io type
+default value: nothing 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: GMAKE 
+description: Fullname of GNU make command (usually gmake)
+default value: gmake 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: GMAKE_J 
+description: Number of processors for gmake
+default value: 24 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: GRID 
+description: CCSM grid
+default value: 0.9x1.25_gx1v6 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: HISTINIT 
+description: logical to write an extra initial coupler history file
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: HIST_DATE 
+description: yyyymmdd format, sets coupler snapshot history date (like REST_DATE)
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: HIST_N 
+description: sets coupler snapshot history file frequency (like REST_N)
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: HIST_OPTION 
+description: sets coupler snapshot history file frequency (like REST_OPTION)
+default value: never 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ICE_GRID 
+description: ice grid (must equal ocn grid)
+default value: gx1v6 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: ICE_NCPL 
+description: number of ice coupling intervals per day (integer)
+default value: $ATM_NCPL 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: ICE_NX 
+description: number of ice cells in i direction
+default value: 320 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: ICE_NY 
+description: number of ice cells in j direction
+default value: 384 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: ICE_PIO_NUMTASKS 
+description: pio number of io tasks
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ICE_PIO_ROOT 
+description: pio root processor
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ICE_PIO_STRIDE 
+description: pio stride
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ICE_PIO_TYPENAME 
+description: pio io type
+default value: nothing 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: INCROOT 
+description: case lib include directory
+default value: $EXEROOT/lib/include 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: INFO_DBUG 
+description: level of debug output, 0=minimum, 1=normal, 2=more, 3=too much
+valid values: 0,1,2,3 
+default value: 1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: LIBROOT 
+description: case lib directory
+default value: $EXEROOT/lib 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: LND_GRID 
+description: land grid
+default value: 0.9x1.25 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: LND_NCPL 
+description: number of land coupling intervals per day (integer)
+default value: $ATM_NCPL 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: LND_NX 
+description: Number of land cells in i direction
+default value: 288 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: LND_NY 
+description: number of land cells in j direction
+default value: 192 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: LND_PIO_NUMTASKS 
+description: pio number of io tasks
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: LND_PIO_ROOT 
+description: pio root processor
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: LND_PIO_STRIDE 
+description: pio stride
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: LND_PIO_TYPENAME 
+description: pio io type
+default value: nothing 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: LOGDIR 
+description: directory where log files should be copied
+       in addition to archiving
+default value: $CASEROOT/logs 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: MACH 
+description: current machine name
+default value: snellius 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: MAP_A2LF_FILE 
+description: atm to land mapping file for fluxes
+default value: idmap 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_A2LS_FILE 
+description: atm to land mapping file for states
+default value: idmap 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_A2OF_FILE 
+description: atm to ocn flux mapping file for fluxes (currently first order conservative)
+default value: map_fv0.9x1.25_to_gx1v6_aave_da_090309.nc 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_A2OS_FILE 
+description: atm to ocn state mapping file for states (currently bilinear)
+default value: map_fv0.9x1.25_to_gx1v6_bilin_da_090309.nc 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_L2AF_FILE 
+description: land to atm mapping file for fluxes
+default value: idmap 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_L2AS_FILE 
+description: land to atm mapping file for states
+default value: idmap 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_O2AF_FILE 
+description: ocn to atm mapping file for fluxes (currently first order conservative)
+default value: map_gx1v6_to_fv0.9x1.25_aave_da_090309.nc 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_O2AS_FILE 
+description: ocn to atm mapping file for states
+default value: map_gx1v6_to_fv0.9x1.25_aave_da_090309.nc 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_R2O_FILE_R05 
+description: runoff (.5 degree) to ocn mapping file
+default value: map_r05_to_gx1v6_e1000r300_090226.nc 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_R2O_FILE_R19 
+description: runoff (19 basin) to ocn mapping file
+default value: UNSET 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAP_R2O_FILE_RX1 
+description: runoff (1 degree) to ocn mapping file
+default value: map_rx1_to_gx1v6_e1000r300_090318.nc 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: MAX_TASKS_PER_NODE 
+description: maximum number of mpi tasks per node
+default value: 192 
+ 
+name: MPISERIAL_SUPPORT 
+description: TRUE implies this machine supports the use of the mpiserial lib.
+        Not all machines support the use of the mpiserial lib. For those
+        that do NOT you will have to make changes similar to other machines
+        that do support it in order for it to work.
+        NOTE: DO NOT SET THIS TO TRUE WITHOUT MAKING THE REQUIRED CHANGES
+              TO THE Macros AND env_machopts FILES!!!
+valid values: TRUE,FALSE 
+default value: TRUE 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: NTASKS_ATM 
+description: number of atmosphere tasks
+default value: 128 
+ 
+name: NTASKS_CPL 
+description: number of coupler mpi tasks
+default value: 128 
+ 
+name: NTASKS_GLC 
+description: number of glc mpi tasks
+default value: 128 
+ 
+name: NTASKS_ICE 
+description: number of ice mpi tasks
+default value: 128 
+ 
+name: NTASKS_LND 
+description: number of land mpi tasks
+default value: 128 
+ 
+name: NTASKS_OCN 
+description: number of ocean mpi tasks
+default value: 128 
+ 
+name: NTHRDS_ATM 
+description: number of atmosphere threads
+default value: 1 
+ 
+name: NTHRDS_CPL 
+description: number of coupler mpi threads
+default value: 1 
+ 
+name: NTHRDS_GLC 
+description: number of glc mpi threads
+default value: 1 
+ 
+name: NTHRDS_ICE 
+description: number of ice mpi threads
+default value: 1 
+ 
+name: NTHRDS_LND 
+description: number of land mpi threads
+default value: 1 
+ 
+name: NTHRDS_OCN 
+description: number of ocean mpi threads
+default value: 1 
+ 
+name: OBJROOT 
+description: case build directory
+default value: $EXEROOT 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: OCN_CHL_TYPE 
+description: provenance of surface Chl for radiative penetration computations
+valid values: diagnostic,prognostic 
+default value: diagnostic 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: OCN_CO2_FLUX_OCMIP_BUG_FIX 
+description: TRUE implies using fix to pH scale of carbon thermodynamic constants
+valid values: TRUE,FALSE 
+default value: TRUE 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: OCN_CO2_TYPE 
+description: provenance of atmospheric CO2 for gas flux computation
+valid values: constant,prognostic,diagnostic 
+default value: constant 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: OCN_COUPLING 
+description: surface heat and freshwater forcing, partial is consistent with coupling to a data atm model
+valid values: full,partial 
+default value: full 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: OCN_GRID 
+description: ocn grid
+default value: gx1v6 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: OCN_ICE_FORCING 
+description: under ice forcing, inactive is consistent with coupling to a data ice model
+valid values: active,inactive 
+default value: active 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: OCN_NCPL 
+description: number of ocn coupling intervals per day (integer)
+default value: 1 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: OCN_NX 
+description: number of ocn cells in i direction
+default value: 320 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: OCN_NY 
+description: number of ocn cells in j direction
+default value: 384 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: OCN_PIO_NUMTASKS 
+description: pio number of io tasks: uses pio_numtasks value if set to -99
+default value: 1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_PIO_ROOT 
+description: pio root processor: uses pio_root value if set to -99
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_PIO_STRIDE 
+description: pio stride: uses pio_stride value if set to -99
+default value: -99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_PIO_TYPENAME 
+description: pio io type: uses pio_typename value if set to \
+default value: nothing 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_TAVG_HIFREQ 
+description: tavg output control for high-frequency output
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_TAVG_TRACER_BUDGET 
+description: tavg output control for tracer-budget terms
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_TIGHT_COUPLING 
+description: if TRUE, treats ocean model like lnd/ice in coupling and
+       removes 1 coupling period lag at the cost of concurrency
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OCN_TRACER_MODULES 
+description: Optional ocean tracers.  Any combination of: iage cfc ecosys
+default value: iage 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: OCN_TRANSIENT 
+description: specification of transient forcing datasets
+valid values: unset,1850-2000 
+default value: unset 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: ORBITAL_MODE 
+description: orbital mode setting
+valid values: fixed_year,variable_year,fixed_parameters 
+default value: fixed_year 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ORBITAL_YEAR 
+description: orbital year
+default value: 1990 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ORBITAL_YEAR_ALIGN 
+description: model year associated with orbital year for varying orbital years
+default value: 1990 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: OS 
+description: operating system
+default value: Linux 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: PES_LEVEL 
+description: pes level determined by automated initialization (DO NOT EDIT)
+default value: 1r 
+ 
+name: PES_PER_NODE 
+description: pes per node for cost scaling
+default value: 192 
+ 
+name: PIO_ASYNC_INTERFACE 
+description: TRUE implies perform asynchronous i/o
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PIO_CONFIG_OPTS 
+description: PIO configure options, see PIO configure utility for details
+default value:  --disable-mct --disable-timing  
+file: env_build.xml 
+locked_stage: none 
+ 
+name: PIO_DEBUG_LEVEL 
+description: pio debug level
+valid values: 0,1,2,3,4,5,6 
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PIO_NUMTASKS 
+description: pio number of io tasks
+default value: -1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PIO_ROOT 
+description: pio root processor
+default value: 1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PIO_STRIDE 
+description: mpi task stride between io tasks
+default value: -1 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PIO_TYPENAME 
+description: pio io type: netcdf, pnetcdf, netcdf4p, netcdf4c
+default value: netcdf 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: POP_AUTO_DECOMP 
+description: if false, user must set the POP decomp, otherwise configure sets it
+valid values: true,false 
+default value: true 
+ 
+name: POP_BLCKX 
+description: Size of pop block in first horiz dimension.
+    Value determined by generate_pop_decomp.pl which is called by configure.
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: POP_BLCKY 
+description: Size of pop block in second horiz dimension.
+    Value determined by generate_pop_decomp.pl which is called by configure.
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: POP_DECOMPTYPE 
+description: pop block distribution type. 
+    Value determined by generate_pop_decomp.pl which is called by configure
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: POP_MXBLCKS 
+description: Max number of pop blocks per processor.
+    Value determined by generate_pop_decomp.pl which is called by configure.
+    Only expert users should edit this
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: PSTRID_ATM 
+description: stride of mpi tasks for atm comp - currently should always be set to 1
+valid values: 1 
+default value: 1 
+ 
+name: PSTRID_CPL 
+description: stride of mpi tasks for cpl comp - currently should always be set to 1
+valid values: 1 
+default value: 1 
+ 
+name: PSTRID_GLC 
+description: stride of mpi tasks for glc comp - currently should always be set to 1
+valid values: 1 
+default value: 1 
+ 
+name: PSTRID_ICE 
+description: stride of mpi tasks for ice comp - currently should always be set to 1
+valid values: 1 
+default value: 1 
+ 
+name: PSTRID_LND 
+description: stride of mpi tasks for lnd comp - currently should always be set to 1
+valid values: 1 
+default value: 1 
+ 
+name: PSTRID_OCN 
+description: stride of mpi tasks for ocn comp - currently should always be set to 1
+valid values: 1 
+default value: 1 
+ 
+name: PTS_LAT 
+description: Points mode nearest latitudes
+default value: -999.99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PTS_LON 
+description: Points mode nearest longitudes
+default value: -999.99 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: PTS_MODE 
+description: Points mode logical for single point
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: REST_DATE 
+description: date in yyyymmdd format, sets model restart write date with REST_OPTION and REST_N
+default value: $STOP_DATE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: REST_N 
+description: sets model restart writes with REST_OPTION and REST_DATE
+       (same options as STOP_N)
+default value: $STOP_N 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: REST_OPTION 
+description: sets frequency of model restart writes (same options as STOP_OPTION)
+        with REST_N and REST_DATE
+default value: $STOP_OPTION 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: RESUBMIT 
+description: if RESUBMIT is greater than 0, then case will automatically resubmit 
+        if that feature is supported in the run script
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: ROOTPE_ATM 
+description: root atm mpi task
+default value: 0 
+ 
+name: ROOTPE_CPL 
+description: root cpl mpi task
+default value: 0 
+ 
+name: ROOTPE_GLC 
+description: root glc mpi task
+default value: 0 
+ 
+name: ROOTPE_ICE 
+description: root ice mpi task
+default value: 0 
+ 
+name: ROOTPE_LND 
+description: root lnd mpi task
+default value: 0 
+ 
+name: ROOTPE_OCN 
+description: root ocn mpi task
+default value: 0 
+ 
+name: RUNDIR 
+description: case run directory
+default value: $EXEROOT/run 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: RUN_REFCASE 
+description: Reference case for hybrid or branch runs
+default value: case.std 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: RUN_REFDATE 
+description: Reference date for hybrid or branch runs (yyyy-mm-dd).
+        Used to determine the component dataset that the model starts from.
+        Ignored for startup runs 
+default value: 0001-01-01 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: RUN_STARTDATE 
+description: Run start date (yyyy-mm-dd). Only used for startup or hybrid runs
+        Ignored for branch runs. 
+default value: 0001-01-01 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: RUN_TYPE 
+description: Run initialization type
+valid values: startup,hybrid,branch 
+default value: startup 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: SAVE_TIMING 
+description: logical to save timing files in rundir
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: SCRIPTSROOT 
+description: CCSM source scripts directory location
+default value: $CCSMROOT/scripts 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: SHAREROOT 
+description: CCSM source models share code location
+default value: $CCSMROOT/models/csm_share 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: SHR_MAP_DOPOLE 
+description: invoke pole averaging corrections in shr_map_mod weights generation
+valid values: TRUE,FALSE 
+default value: TRUE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: SMP_BUILD 
+description: smp status of previous build, coded string. (DO NOT EDIT)
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: SMP_VALUE 
+description: smp status of current setup, coded string (DO NOT EDIT)
+default value: 0 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: START_TOD 
+description: start time-of-day in universal time (seconds), should be between zero and 86400
+default value: 0 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: STOP_DATE 
+description: date in yyyymmdd format, sets the run length with STOP_OPTION and STOP_N,
+        can be in addition to STOP_OPTION and STOP_N, negative value implies off
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: STOP_N 
+description: sets the run length with STOP_OPTION and STOP_DATE
+default value: 5 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: STOP_OPTION 
+description: sets the run length with STOP_N and STOP_DATE
+        STOP_OPTION alarms are:
+        [none/never], turns option off
+        [nstep/s]   , stops every STOP_N nsteps  , relative to current run start time
+        [nsecond/s] , stops every STOP_N nseconds, relative to current run start time
+        [nminute/s] , stops every STOP_N nminutes, relative to current run start time
+        [nhour/s]   , stops every STOP_N nhours  , relative to current run start time
+        [nday/s]    , stops every STOP_N ndays   , relative to current run start time
+        [nmonth/s]  , stops every STOP_N nmonths , relative to current run start time
+        [nyear/s]   , stops every STOP_N nyears  , relative to current run start time
+        [date]      , stops at STOP_DATE value
+        [ifdays0]   , stops at STOP_N calendar day value and seconds equal 0
+        [end]       , stops at end
+valid values: none,never,nsteps,nstep,nseconds,nsecond,nminutes,nminute,nhours,nhour,ndays,nday,nmonths,nmonth,nyears,nyear,date,ifdays0,end 
+default value: ndays 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: TIMER_LEVEL 
+description: timer output depth
+valid values: 1,2,3,4,5,6,7,8,9,10 
+default value: 4 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: TIMING_BARRIER 
+description: if TRUE, turns on the timing barrier calls in the model
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: TOTALPES 
+description: total number of pes (derived automatically - DO NOT EDIT)
+default value: 0 
+ 
+name: TPROF_DATE 
+description: yyyymmdd format, sets timing output file date (like REST_DATE)
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: TPROF_N 
+description: sets timing output file frequency (like REST_N)
+default value: -999 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: TPROF_OPTION 
+description: sets timing output file frequency (like REST_OPTION but relative to run start date)
+default value: never 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: USE_ESMF_LIB 
+description: TRUE implies using the ESMF library specified by ESMF_LIBDIR or ESMFMKFILE
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_build.xml 
+locked_stage: none 
+ 
+name: USE_MPISERIAL 
+description: TRUE implies code is built using the mpiserial library.
+        If TRUE, the MPISERIAL_SUPPORT must also be TRUE.
+        FALSE (default) implies that code is built with a real MPI library.
+        If a job uses only one MPI task (e.g. single-column CAM and CLM), 
+        the mpiserial lib may be an alternative to real mpi lib
+valid values: TRUE,FALSE 
+default value: FALSE 
+file: env_conf.xml 
+locked_stage: configure -case 
+ 
+name: UTILROOT 
+description: CCSM source scripts utils directory location
+default value: $CCSMROOT/scripts/ccsm_utils 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 
+name: VECT_MAP 
+description: invoke vector mapping option
+valid values: none,npfix,cart3d,cart3d_diag,cart3d_uvw,cart3d_uvw_diag 
+default value: npfix 
+file: env_run.xml 
+locked_stage: none 
+ 
+name: XMLMODE 
+description: xml format option, expert removes extra comments from env xml files
+valid values: normal,expert 
+default value: normal 
+file: env_case.xml 
+locked_stage: create_newcase 
+ 

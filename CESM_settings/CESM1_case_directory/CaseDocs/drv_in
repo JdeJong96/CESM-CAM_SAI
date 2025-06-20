@@ -1,0 +1,160 @@
+&seq_infodata_inparm
+  case_name     = 'lres_b.e10.B2000_CAM5.f09_g16.feedforward_2050.001 '
+  case_desc     = 'UNSET '
+  model_version = 'cesm1_0_4 '
+  username      = 'renew1 '
+  hostname      = 'snellius '
+  timing_dir    = './timing'
+  tchkpt_dir    = './timing/checkpoints'
+  start_type    = 'continue'
+  brnch_retain_casename = .false.
+  info_debug    = 1
+  bfbflag       = .false.
+  orb_mode        = 'fixed_year'
+  orb_iyear       = 1990
+  orb_iyear_align = 1990
+  flux_epbal    = 'off'
+  flux_albav    = .false.
+  samegrid_al   = .true.
+  samegrid_ro   = .false.
+  samegrid_ao   = .false.
+  shr_map_dopole = .true.
+  vect_map      = 'npfix'
+  aoflux_grid   = 'ocn'
+  ocean_tight_coupling = .false.
+  cpl_cdf64     = .true.
+  do_budgets    = .true.
+  do_histinit   = .false.
+  budget_inst   = 0
+  budget_daily  = 0
+  budget_month  = 1
+  budget_ann    = 1
+  budget_ltann  = 1
+  budget_ltend  = 0
+  histaux_a2x     = .false.
+  histaux_a2x3hr  = .false.
+  histaux_a2x3hrp = .false.
+  histaux_a2x24hr = .false.
+  histaux_l2x     = .false.
+  histaux_r2x     = .false.
+  drv_threading = .false.
+  run_barriers  = .false.
+  eps_frac      = 1.0e-02
+  eps_amask     = 1.0e-13
+  eps_agrid     = 1.0e-12
+  eps_aarea     = 9.0e-07
+  eps_omask     = 1.0e-06
+  eps_ogrid     = 1.0e-02
+  eps_oarea     = 1.0e-01
+   
+/ 
+&seq_timemgr_inparm
+  calendar       = 'NO_LEAP'
+  atm_cpl_dt     = 1800
+  lnd_cpl_dt     = 1800
+  ocn_cpl_dt     = 86400
+  ice_cpl_dt     = 1800
+  glc_cpl_dt     = 86400
+  start_ymd      =  20000101
+  start_tod      = 0
+  stop_option    ='nyear'
+  stop_n         = 1
+  stop_ymd       = -999
+  restart_option ='nyear'
+  restart_n      = 1
+  restart_ymd    = -999
+  end_restart    = .false.
+  history_option ='never'
+  history_n      = -999
+  history_ymd    = -999
+  histavg_option ='never'
+  histavg_n      = -999
+  histavg_ymd    = -999
+  tprof_option   ='never'
+  tprof_n        = -999
+  tprof_ymd      = -999
+/
+&ccsm_pes
+  atm_ntasks   = 576
+  atm_nthreads = 1 
+  atm_rootpe   = 0
+  atm_pestride = 1
+
+  lnd_ntasks   = 192
+  lnd_nthreads = 1 
+  lnd_rootpe   = 384
+  lnd_pestride = 1
+
+  ice_ntasks   = 384
+  ice_nthreads = 1 
+  ice_rootpe   = 0
+  ice_pestride = 1
+
+  ocn_ntasks   = 96
+  ocn_nthreads = 1 
+  ocn_rootpe   = 576
+  ocn_pestride = 1
+
+  glc_ntasks   = 64
+  glc_nthreads = 1 
+  glc_rootpe   = 0
+  glc_pestride = 1
+
+  cpl_ntasks   = 64
+  cpl_nthreads = 1 
+  cpl_rootpe   = 0
+  cpl_pestride = 1
+/
+&prof_inparm
+  profile_disable = .false.
+  profile_barrier = .false.
+  profile_single_file = .false.
+  profile_depth_limit = 4
+  profile_detail_limit = 0
+/
+!
+! NOTE: pio_async_interface=.true. is not yet supported
+!
+! If pio_async_interface is .true. or {component}_PIO_* variable is not set or set to -99
+! the component variable will be set using the pio_* value.
+! 
+!
+&pio_inparm
+ pio_async_interface = .false.
+ pio_stride          = -1  
+ pio_root            = 1
+ pio_numtasks        = -1
+ pio_typename        ='netcdf'
+ pio_debug_level     = 0
+
+ ocn_pio_stride      = -99  
+ ocn_pio_root        = 0
+ ocn_pio_numtasks    = 1
+ ocn_pio_typename    ='nothing'
+
+ lnd_pio_stride      = -99  
+ lnd_pio_root        = -99
+ lnd_pio_numtasks    = -99
+ lnd_pio_typename    ='nothing'
+
+ ice_pio_stride      = -99  
+ ice_pio_root        = -99
+ ice_pio_numtasks    = -99
+ ice_pio_typename    ='nothing'
+
+ atm_pio_stride      = -99  
+ atm_pio_root        = -99
+ atm_pio_numtasks    = -99
+ atm_pio_typename    ='nothing'
+
+ cpl_pio_stride      = -99  
+ cpl_pio_root        = -99
+ cpl_pio_numtasks    = -99
+ cpl_pio_typename    ='nothing'
+
+ glc_pio_stride      = -99  
+ glc_pio_root        = -99
+ glc_pio_numtasks    = -99
+ glc_pio_typename    ='nothing'
+
+/

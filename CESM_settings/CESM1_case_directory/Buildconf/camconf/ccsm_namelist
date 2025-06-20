@@ -1,0 +1,6 @@
+ &cam_inparm
+ dtime          =  1800
+ cam_branch_file= ' '
+ co2vmr         = 367.0e-6
+ ncdata  = 'spinup_pd_maxcores_f09_g16.cam2.i.0200-01-01-00000.nc'
+/

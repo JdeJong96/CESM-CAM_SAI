@@ -1,0 +1,26 @@
+#! /bin/csh -f
+
+./Tools/ccsm_check_lockedfiles || exit -1
+
+source ./Tools/ccsm_getenv || exit -2
+
+set SNAME = $0 ; set SNAME = \($SNAME:t\)
+if ($USE_MPISERIAL == "TRUE" && $MPISERIAL_SUPPORT == "FALSE") then
+   echo "$SNAME ERROR: USE_MPISERIAL == TRUE not supported on snellius"
+   echo "$SNAME set USE_MPISERIAL = FALSE in env_conf.xml"
+   echo "$SNAME See the documentation about enabling this mode"
+   exit -1
+endif
+
+setenv LID "`date +%y%m%d-%H%M%S`"
+
+cd $CASEROOT
+source $CASETOOLS/ccsm_buildnml.csh || exit -3
+cd $CASEROOT
+source $CASETOOLS/ccsm_prestage.csh || exit -3
+cd $CASEROOT
+source $CASETOOLS/ccsm_buildexe.csh || exit -3
+
+set sdate = `date +"%Y-%m-%d %H:%M:%S"`
+echo "build complete $sdate" >>& $CASEROOT/CaseStatus
+

@@ -1,0 +1,5 @@
+$CASEROOT/SourceMods/src.cice
+$CODEROOT/ice/cice/src/drivers/cpl_$comp
+$CODEROOT/ice/cice/src/drivers/cpl_share
+$CODEROOT/ice/cice/src/mpi
+$CODEROOT/ice/cice/src/source
