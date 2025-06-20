@@ -1,0 +1,14 @@
+&drydep_inparm
+/
+&megan_emis_nl
+/
+&fire_emis_nl
+/
+&carma_inparm
+/
+!#--------------------------------------------------------------------------------------------------------------------------
+!# drv_flds_in:: Comment:
+!# This namelist was created using the following command-line:
+!#     /gpfs/home1/kampe004/cesm/cesm_tags/cesm2.1.3-release-git/components/clm/bld/CLM build-namelist -cimeroot /gpfs/home1/kampe004/cesm/cesm_tags/cesm2.1.3-release-git/cime/scripts/Tools/../.. -infile /gpfs/home1/kampe004/cesm/my_cases/cesm2_geo/b.e21.BSSP585cmip6.f09_g17.feedback.09/Buildconf/clmconf/namelist -csmdata /projects/0/uuesm/inputdata -inputdata /gpfs/home1/kampe004/cesm/my_cases/cesm2_geo/b.e21.BSSP585cmip6.f09_g17.feedback.09/Buildconf/clm.input_data_list -ignore_ic_year -namelist &clm_inparm  start_ymd=20800101 /  -no-megan -use_case 1850-2100_SSP5-8.5_transient -res 0.9x1.25 -clm_start_type startup -envxml_dir /gpfs/home1/kampe004/cesm/my_cases/cesm2_geo/b.e21.BSSP585cmip6.f09_g17.feedback.09 -l_ncpl 48 -lnd_frac /projects/0/uuesm/inputdata/share/domains/domain.lnd.fv0.9x1.25_gx1v7.151020.nc -glc_nec 10 -co2_ppmv 284.7 -co2_type diagnostic -config /gpfs/home1/kampe004/cesm/my_cases/cesm2_geo/b.e21.BSSP585cmip6.f09_g17.feedback.09/Buildconf/clmconf/config_cache.xml -bgc bgc -crop -clm_accelerated_spinup off -lnd_tuning_mode clm5_0_cam6.0 -mask gx1v7
+!# For help on options use: /gpfs/home1/kampe004/cesm/cesm_tags/cesm2.1.3-release-git/components/clm/bld/CLM build-namelist -help
+!#--------------------------------------------------------------------------------------------------------------------------

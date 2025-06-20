@@ -1,0 +1,13 @@
+&modelio
+  diri = "/home/kampe004/cesm_bld/b.e21.BSSP585cmip6.f09_g17.feedback.09/bld/esp"
+  diro = "/projects/0/uuesm2//b.e21.BSSP585cmip6.f09_g17.feedback.09/run"
+  logfile = "esp.log.2212921.230211-004714"
+/
+&pio_inparm
+  pio_netcdf_format = ""
+  pio_numiotasks = -99
+  pio_rearranger = -99
+  pio_root = -99
+  pio_stride = -99
+  pio_typename = "nothing"
+/
