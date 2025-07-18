@@ -1,1 +1,0 @@
-create_newcase -case lres_b.e10.B2000_CAM5.f09_g16.001 -compset B_2000 -res f09_g16 -mach snellius

@@ -1,8 +1,0 @@
-fatmgrid = $DIN_LOC_ROOT/lnd/clm2/griddata/griddata_0.9x1.25_070212.nc
-fsnowoptics = $DIN_LOC_ROOT/lnd/clm2/snicardata/snicar_optics_5bnd_c090915.nc
-finidat = spinup_pd_maxcores_f09_g16.clm2.r.0200-01-01-00000.nc
-frivinp_rtm = $DIN_LOC_ROOT/lnd/clm2/rtmdata/rdirc_0.5x0.5_simyr2000_c101124.nc
-fatmlndfrc = $DIN_LOC_ROOT/lnd/clm2/griddata/fracdata_0.9x1.25_gx1v6_c090317.nc
-fsurdat = $DIN_LOC_ROOT/lnd/clm2/surfdata/surfdata_0.9x1.25_simyr2000_c091006.nc
-fpftcon = $DIN_LOC_ROOT/lnd/clm2/pftdata/pft-physiology.c110425.nc
-fsnowaging = $DIN_LOC_ROOT/lnd/clm2/snicardata/snicar_drdt_bst_fit_60_c070416.nc

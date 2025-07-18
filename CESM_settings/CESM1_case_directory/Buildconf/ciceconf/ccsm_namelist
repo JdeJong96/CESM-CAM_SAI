@@ -1,6 +1,0 @@
- &ice_nml
- ice_ic = 'spinup_pd_maxcores_f09_g16.cice.r.0200-01-01-00000.nc'
- /
- &domain_nml
- distribution_type = 'DECOMPTYPE'
- / 
